@@ -1,0 +1,197 @@
+VERSION ""
+
+
+
+
+
+NS_ : 
+
+	NS_DESC_
+
+	CM_
+
+	BA_DEF_
+
+	BA_
+
+	VAL_
+
+	CAT_DEF_
+
+	CAT_
+
+	FILTER
+
+	BA_DEF_DEF_
+
+	EV_DATA_
+
+	ENVVAR_DATA_
+
+	SGTYPE_
+
+	SGTYPE_VAL_
+
+	BA_DEF_SGTYPE_
+
+	BA_SGTYPE_
+
+	SIG_TYPE_REF_
+
+	VAL_TABLE_
+
+	SIG_GROUP_
+
+	SIG_VALTYPE_
+
+	SIGTYPE_VALTYPE_
+
+	BO_TX_BU_
+
+	BA_DEF_REL_
+
+	BA_REL_
+
+	BA_DEF_DEF_REL_
+
+	BU_SG_REL_
+
+	BU_EV_REL_
+
+	BU_BO_REL_
+
+	SG_MUL_VAL_
+
+
+
+BS_:
+
+
+
+BU_: PC MCU Vector_XXX BMS
+
+VAL_TABLE_ Vt_Sig_Immo_Key_status 182 "Key authentication successful" 4 "Key authentication unsuccessful" 1 "Key authentication in progress" ;
+
+VAL_TABLE_ Vt_Sig_Immo_Internal_Fault 1 "Fault" 0 " No Fault" ;
+
+VAL_TABLE_ Vt_Sig_Immo_LF_Fault 1 "Fault" 0 " No Fault" ;
+
+VAL_TABLE_ Vt_Sig_Immo_No_Valid_Key 1 "Fault" 0 "No Fault" ;
+
+VAL_TABLE_ Vt_Sig_Immo_Tell_Tale 3 "FLASHING (1- 0.5 ON, 0.5 OFF)" 2 "FLASHING (0.5 - 1 ON, 1 OFF)" 1 "ON" 0 "OFF" ;
+
+VAL_TABLE_ Vt_Sig_Charger_Controlmode 1 "Remote Control C-V-Limiting" 0 "Open Circuit" ;
+
+
+
+
+
+BO_ 1587 MCU_Status_3_Info: 8 Vector__XXX
+
+ SG_ Side_Stand_status : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+
+
+
+BO_ 1554 ID_0x612: 6 MCU
+
+ SG_ TotalOdometerMileage : 16|32@1+ (0.1,0) [0|429497000] "km"  PC
+
+
+
+BO_ 1585 ID_0x631: 8 MCU
+
+ SG_ ThrottlePercentage : 16|16@1+ (1,0) [0|100] "%"  PC
+
+
+
+BO_ 1553 ID_0x611: 7 MCU
+
+ SG_ MCUDCVoltage : 16|16@1+ (0.0078125,0) [0|511.992] "V"  PC
+
+ SG_ SpeedData : 0|16@1- (10,0) [-327680|327670] "m/hr"  PC
+
+
+
+BO_ 1552 ID_0x610: 8 MCU
+
+ SG_ BrakeFaultStatus : 27|1@1+ (1,0) [0|1] ""  PC
+
+ SG_ BrakeStatus : 11|1@1+ (1,0) [0|1] ""  PC
+
+ SG_ PositionSensorFault : 33|1@1+ (1,0) [0|1] ""  PC
+
+ SG_ SpeedModeStatus : 0|3@1+ (1,0) [0|7] ""  PC
+
+ SG_ DriveModeStatus : 48|3@1+ (1,0) [0|7] ""  PC
+
+
+
+
+
+
+
+CM_ SG_ 1587 Side_Stand_status "0 Side stand up
+
+1 Side stand down
+
+";
+
+BA_DEF_  "BusType" STRING ;
+
+BA_DEF_ SG_  "GenSigStartValue" FLOAT 0 1215752192;
+
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActivWithRepetition","NoSigSendType";
+
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "cyclicX","spontanX","cyclicIfActiveX","spontanWithDelay","cyclicAndSpontanX","cyclicAndSpontanWithDelay","spontanWithRepitition","cyclicIfActiveAndSpontanWD","cyclicIfActiveFast";
+
+BA_DEF_ BO_  "GenMsgPDUConstants" STRING ;
+
+BA_DEF_ BO_  "GenMsgDirection" STRING ;
+
+BA_DEF_ BU_  "e" HEX 5 5;
+
+BA_DEF_DEF_  "BusType" "";
+
+BA_DEF_DEF_  "GenSigStartValue" 0;
+
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+
+BA_DEF_DEF_  "GenMsgSendType" "cyclicX";
+
+BA_DEF_DEF_  "GenMsgPDUConstants" "";
+
+BA_DEF_DEF_  "GenMsgDirection" "RX";
+
+BA_DEF_DEF_  "e" 5;
+
+BA_ "BusType" "CAN";
+
+BA_ "GenMsgDirection" BO_ 1554 "TX";
+
+BA_ "GenMsgCycleTime" BO_ 1554 1000;
+
+BA_ "GenMsgDirection" BO_ 1585 "TX";
+
+BA_ "GenMsgCycleTime" BO_ 1585 50;
+
+BA_ "GenMsgDirection" BO_ 1553 "TX";
+
+BA_ "GenMsgCycleTime" BO_ 1553 50;
+
+BA_ "GenMsgDirection" BO_ 1552 "TX";
+
+BA_ "GenMsgCycleTime" BO_ 1552 140;
+
+VAL_ 1552 BrakeFaultStatus 0 "No Fault" 1 "Fault" ;
+
+VAL_ 1552 BrakeStatus 0 "Inactive" 1 "Active" ;
+
+VAL_ 1552 PositionSensorFault 0 "No Fault" 1 "Fault" ;
+
+VAL_ 1552 SpeedModeStatus 0 "Neutral" 4 "Invalid" 3 "Mode 3(high speed mode) status" 2 "Mode 2(middle speed mode) status" 1 "Mode 1(low speed mode) status" ;
+
+VAL_ 1552 DriveModeStatus 0 "NormalMode Status" 1 "Reverse Mode status" ;
