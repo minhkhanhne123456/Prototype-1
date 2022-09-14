@@ -1,14 +1,14 @@
 #ifndef _SDL_UTILS_CAN_UTILS_H_
 #define _SDL_UTILS_CAN_UTILS_H_
-
 #include <cstdint>
-
+#include <string>
 namespace utils {
 
 struct canConfigure {
     uint32_t canId;         // number of CAN ID
     uint16_t canLength;     // length of frame in byte
     uint8_t startBit;       // start bit
+    string name_variables;
     uint16_t length;        // length of value in bit
     double scale;           // scale value
     double offset;          // offset value
