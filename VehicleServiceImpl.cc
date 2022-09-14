@@ -5,6 +5,7 @@
 #include "VehicleServiceImpl.h"
 #include "CoreTypes.h"
 #include "Log.h"
+#include <iostream>
 
 namespace sdl {
 
