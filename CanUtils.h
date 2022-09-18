@@ -7,19 +7,21 @@
 #include <fstream>
 #include <iostream>
 
+const int SIZE = 1000;
+
 using namespace std;
 namespace utils {
 
 struct canConfigure {
     uint32_t canId;         // number of CAN ID
     uint16_t canLength;     // len`gth of frame in byte
-    uint8_t startBit;       // start bit
-    uint16_t length; 
-    string name_variables;  // length of value in bit
+    uint16_t startBit;      // start bit
+    uint16_t length;        // length of value in bit
+    string name_variables;  // name of signals
     double scale;           // scale value
     double offset;          // offset value
     bool isBigendian;       // true if bigendian
-};
+}canconfigure[SIZE];
 
 /* @brief get parking status from CAN frame
 *  @param[in] inCanConfig Can Configure of the value need to get

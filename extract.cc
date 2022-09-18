@@ -57,7 +57,7 @@ void extractMessageSignal(string dbcFile){
                 int decimalNum1 = stoi(messageData[1]);
                 i = DecToHexDec(decimalNum1,0);
                 cout << arrangeHex(i) <<endl;
-                dbcfile <<"0x" << arrangeHex(i) << " " << messageData[3] << " "
+                dbcfile << arrangeHex(i) << " " << messageData[3] << " "
                         << signalData[1] << " " << signalData[3] << " "
                         << signalData[4] << " "  << " \n";
             }

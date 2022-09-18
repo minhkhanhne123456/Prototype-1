@@ -9,46 +9,46 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 static int number_of_lines;
 
-int main(){
-    n
+template <size_t N>
+//Split string and add to array
+
+void splitString(string (&arr)[N], string str)
+{
+    int n = 0;
+    istringstream iss(str);
+    for (auto it = istream_iterator<string>(iss); it != istream_iterator<string>() && n < N; ++it, ++n)
+        arr[n] = *it;
 }
-
-ifstream in("CAN_config1.txt");
-
 
 namespace sdl {
 
-
-/*
-int main(){
-    numberoflines();
-    creatingstructs();
-    writingtostructs();
-    return 0;
-}
-
-*/
-
-void VehicleServiceImpl::writingtostructs(){
-    //Writing data to structs 
-    for (int i = 0; i < number_of_lines; i++)
-    {  
-    if (!in)
-    {                                               
-    cerr << "File can't be opened! " << endl;
-    system("PAUSE");
-    }
-    in >> utils::canConfigure VehicleServiceImpl::canconfigure[i].canId >> utils::canConfigure VehicleServiceImpl::canconfigure[i].canLength >> utils::canConfigure VehicleServiceImpl::canconfigure[i].name_variables >>
-    utils::canConfigure VehicleServiceImpl::canconfigure[i].startBit >> utils::canConfigure VehicleServiceImpl::canconfigure[i].length >> utils::canConfigure VehicleServiceImpl::canconfigure[i].scale >>
-    utils::canConfigure VehicleServiceImpl::canconfigure[i].offset >> utils::canConfigure VehicleServiceImpl::canconfigure[i].isBigendian;
+void loadData()
+{   
+    ifstream in("CAN_config1.txt");
+    string line1;
+    
+    while (getline (in, line1))
+    {
+        string splitdata[8];
+        string split = "" + line1;
+        splitString(splitdata,split);
+        //Check split data 
+        cout << splitdata[0] << " " << splitdata[1] << " " << splitdata[2] << " " << splitdata[3] << " " <<
+        splitdata[4] << " " << splitdata[5] << " " << splitdata[6] << " " << splitdata[7] << " " << endl;
+        
+        // Create a multiple structures and assign values to struct variables, Error: Segmentation fault
+        utils::canConfigure canconfigure1[number_of_lines] = {splitdata[0],splitdata[1],splitdata[2],splitdata[3],splitdata[4],splitdata[5],splitdata[6],splitdata[7]};
+        number_of_lines++;
+        
     }
 }
 
-
-    /*utils::canConfigure VehicleServiceImpl::canconfigure[i] = {0x610, 8, 0, 3, 1, 0, false}; // SpeedModeStatus
+    /*
+    utils::canConfigure VehicleServiceImpl::mCanConfigSpeedData = {0x610, 8, 0, 3, 1, 0, false}; // SpeedModeStatus
     utils::canConfigure VehicleServiceImpl::mCanConfigBrake = {0x610, 8, 11, 1, 1, 0, false}; // BrakeStatus
     utils::canConfigure VehicleServiceImpl::mCanConfigBrakeFault = {0x610, 8, 27, 1, 1, 0, false}; // BrakeFaultStatus
     utils::canConfigure VehicleServiceImpl::mCanConfigPositionSensorFault = {0x610, 8, 33, 1, 1, 0, false}; // PositionSensorFault
@@ -266,6 +266,7 @@ const Json::Value VehicleServiceImpl::getVehicleData(const Json::Value& root) {
     }
     return response;
 }
+
 
 
 int VehicleServiceImpl::subscribeVehicleData(const Json::Value& params) {
