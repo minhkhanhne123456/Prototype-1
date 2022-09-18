@@ -1,15 +1,21 @@
 #ifndef _SDL_UTILS_CAN_UTILS_H_
 #define _SDL_UTILS_CAN_UTILS_H_
+
 #include <cstdint>
 #include <string>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 namespace utils {
 
 struct canConfigure {
     uint32_t canId;         // number of CAN ID
-    uint16_t canLength;     // length of frame in byte
+    uint16_t canLength;     // len`gth of frame in byte
     uint8_t startBit;       // start bit
-    string name_variables;
-    uint16_t length;        // length of value in bit
+    uint16_t length; 
+    string name_variables;  // length of value in bit
     double scale;           // scale value
     double offset;          // offset value
     bool isBigendian;       // true if bigendian

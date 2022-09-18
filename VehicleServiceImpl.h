@@ -52,7 +52,29 @@ class VehicleServiceImpl : public Service {
     const Json::Value getVehicleData(const Json::Value& params);
     int subscribeVehicleData(const Json::Value& params);
     int unsubscribeVehicleData(const Json::Value& params);
-    
+
+    int numberoflines(){
+    //Reading the number of lines based on the number of signals
+    string line;
+    ifstream myfile("CAN_config1.txt");
+    if(myfile.is_open()){
+        while(getline(myfile,line)){
+            number_of_lines++;
+        }
+        myfile.close();
+    }
+    return number_of_lines;
+    }
+
+    void creatingstructs(){
+        //Creating the number of structs based on the number of lines
+        int N;
+        vector<utils::canConfigure> canconfigure( N );
+        for ( int i = 0; i < number_of_lines; i++){
+            utils::canConfigure canconfigure[i];
+            
+        }
+    }
     // TODO: Change to member variable when we have configure file
     static utils::canConfigure mCanConfigSpeedData;
     static utils::canConfigure mCanConfigMCUDCVoltage;

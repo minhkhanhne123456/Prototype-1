@@ -5,95 +5,61 @@
 #include "VehicleServiceImpl.h"
 #include "CoreTypes.h"
 #include "Log.h"
+#include <fstream>
 #include <iostream>
-
-
+#include <string>
+#include <vector>
 
 static int number_of_lines;
+
+int main(){
+    n
+}
+
 ifstream in("CAN_config1.txt");
-const int SIZE = 1000;
-void debugPrint();
-void loadData();
-int numberoflines();
 
-
-int main()
-    {
-    numberoflines();
-    loadData();
-    debugPrint();
-    //cout << canconfigure[0].canid << " ";
-    // cout << canconfigure[0].name_variables << " " ; 
-    // cout << canconfigure[0].canlength << " "; 
-    // cout << canconfigure[0].startbit << " ";
-    // cout << canconfigure[0].length << " " ;
-    // cout << canconfigure[0].scale << " ";
-    // cout << canconfigure[0].offset << " " ;
-    // cout << canconfigure[0].endian << " ";
-    // cout << "The number of lines is: " << number_of_lines << endl;
-
-    return 0;
-    }
-
-void debugPrint()
-{
-    for (int i = 0; i < number_of_lines; i++) 
-    {
-        cout << canconfigure1[i].canid << " ";
-        cout << canconfigure1[i].canlength << " ";
-        cout << canconfigure1[i].name_variables<<" ";
-        cout << canconfigure1[i].startbit << " ";
-        cout << canconfigure1[i].length << " " ;
-        cout << canconfigure1[i].scale <<" ";
-        cout << canconfigure1[i].offset <<" " ;
-        cout << canconfigure1[i].endian << " " << endl;
-    }
-}
-
-
-void loadData()
-{   
-    for (int i = 0; i < number_of_lines; i++)
-    {
-        int temp;
-        if (!in)
-        {                                               
-            cerr << "File can't be opened! " << endl;
-            system("PAUSE");
-        }
-        in >> canconfigure1[i].canid >> canconfigure1[i].canlength >> canconfigure1[i].name_variables >> canconfigure1[i].startbit >> canconfigure1[i].length  >> canconfigure1[i].endian >> canconfigure1[i].scale >>canconfigure1[i].offset;
-        
-    }
-}
-
-int numberoflines(){
-    string line;
-    ifstream myfile("CAN_config1.txt");
-    if(myfile.is_open()){
-        while(getline(myfile,line)){
-            number_of_lines++;
-        }
-        myfile.close();
-    }
-    return number_of_lines;
-}
-*/
 
 namespace sdl {
 
-// TODO: Change to member variable when we have configure file
-utils::canConfigure VehicleServiceImpl::mCanConfigSpeedMode = {0x610, 8, 0, 3, 1, 0, false}; // SpeedModeStatus
-utils::canConfigure VehicleServiceImpl::mCanConfigBrake = {0x610, 8, 11, 1, 1, 0, false}; // BrakeStatus
-utils::canConfigure VehicleServiceImpl::mCanConfigBrakeFault = {0x610, 8, 27, 1, 1, 0, false}; // BrakeFaultStatus
-utils::canConfigure VehicleServiceImpl::mCanConfigPositionSensorFault = {0x610, 8, 33, 1, 1, 0, false}; // PositionSensorFault
-utils::canConfigure VehicleServiceImpl::mCanConfigDriveMode = {0x610, 8, 48, 3, 1, 0, false}; // DriveModeStatus
-utils::canConfigure VehicleServiceImpl::mCanConfigSpeedData = {0x611, 7, 0, 16, 10, 0, false}; //SpeedData
-utils::canConfigure VehicleServiceImpl::mCanConfigMCUDCVoltage = {0x611, 7, 16, 16, 0.0078125, 0, false}; //MCUDCVoltage
-utils::canConfigure VehicleServiceImpl::mCanConfigTotalOdometerMileage = {0x612, 6, 16, 32, 0.1, 0, false}; //TotalOdometerMileage
-utils::canConfigure VehicleServiceImpl::mCanConfigThrottlePercentage = {0x631, 8, 16, 16, 1, 0, false}; //ThrottlePercentage
-utils::canConfigure VehicleServiceImpl::mCanConfigSideStand = {0x633, 8, 48, 1, 1, 0, false}; //Side_Stand_Status
-utils::canConfigure VehicleServiceImpl::mCanConfigSOCDisplay = {0x633, 8, 32, 8, 1, 0, false}; //SOC_Display
 
+/*
+int main(){
+    numberoflines();
+    creatingstructs();
+    writingtostructs();
+    return 0;
+}
+
+*/
+
+void VehicleServiceImpl::writingtostructs(){
+    //Writing data to structs 
+    for (int i = 0; i < number_of_lines; i++)
+    {  
+    if (!in)
+    {                                               
+    cerr << "File can't be opened! " << endl;
+    system("PAUSE");
+    }
+    in >> utils::canConfigure VehicleServiceImpl::canconfigure[i].canId >> utils::canConfigure VehicleServiceImpl::canconfigure[i].canLength >> utils::canConfigure VehicleServiceImpl::canconfigure[i].name_variables >>
+    utils::canConfigure VehicleServiceImpl::canconfigure[i].startBit >> utils::canConfigure VehicleServiceImpl::canconfigure[i].length >> utils::canConfigure VehicleServiceImpl::canconfigure[i].scale >>
+    utils::canConfigure VehicleServiceImpl::canconfigure[i].offset >> utils::canConfigure VehicleServiceImpl::canconfigure[i].isBigendian;
+    }
+}
+
+
+    /*utils::canConfigure VehicleServiceImpl::canconfigure[i] = {0x610, 8, 0, 3, 1, 0, false}; // SpeedModeStatus
+    utils::canConfigure VehicleServiceImpl::mCanConfigBrake = {0x610, 8, 11, 1, 1, 0, false}; // BrakeStatus
+    utils::canConfigure VehicleServiceImpl::mCanConfigBrakeFault = {0x610, 8, 27, 1, 1, 0, false}; // BrakeFaultStatus
+    utils::canConfigure VehicleServiceImpl::mCanConfigPositionSensorFault = {0x610, 8, 33, 1, 1, 0, false}; // PositionSensorFault
+    utils::canConfigure VehicleServiceImpl::mCanConfigDriveMode = {0x610, 8, 48, 3, 1, 0, false}; // DriveModeStatus
+    utils::canConfigure VehicleServiceImpl::mCanConfigSpeedData = {0x611, 7, 0, 16, 10, 0, false}; //SpeedData
+    utils::canConfigure VehicleServiceImpl::mCanConfigMCUDCVoltage = {0x611, 7, 16, 16, 0.0078125, 0, false}; //MCUDCVoltage
+    utils::canConfigure VehicleServiceImpl::mCanConfigTotalOdometerMileage = {0x612, 6, 16, 32, 0.1, 0, false}; //TotalOdometerMileage
+    utils::canConfigure VehicleServiceImpl::mCanConfigThrottlePercentage = {0x631, 8, 16, 16, 1, 0, false}; //ThrottlePercentage
+    utils::canConfigure VehicleServiceImpl::mCanConfigSideStand = {0x633, 8, 48, 1, 1, 0, false}; //Side_Stand_Status
+    utils::canConfigure VehicleServiceImpl::mCanConfigSOCDisplay = {0x633, 8, 32, 8, 1, 0, false}; //SOC_Display
+    */
 
 VehicleServiceImpl::VehicleServiceImpl()
     : mCallback(nullptr)
@@ -200,7 +166,11 @@ double VehicleServiceImpl::getValueFromCan(utils::canConfigure inCanConfig) {
     return value;
 }
 
+
+
+
 // TODO: Change to member variable when we have configure file
+
 const Json::Value VehicleServiceImpl::getVehicleData(const Json::Value& root) {
     Json::Value response;
     response[json_keys::kJsonrpc] = "2.0";
@@ -296,6 +266,7 @@ const Json::Value VehicleServiceImpl::getVehicleData(const Json::Value& root) {
     }
     return response;
 }
+
 
 int VehicleServiceImpl::subscribeVehicleData(const Json::Value& params) {
     // TODO: do nothing

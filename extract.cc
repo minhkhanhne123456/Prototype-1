@@ -98,8 +98,8 @@ int DecToHexDec(int dec, int i){
 string arrangeHex(int i){
     string temp ;
     for(i=i-1; i>=0; i--){
-        //cout<<hexaDecNum[i];
+       
         temp += hexaDecNum[i];}
-   // cout<< temp<< endl;
+   
     return temp;
 }

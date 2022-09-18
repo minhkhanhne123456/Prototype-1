@@ -31,9 +31,9 @@ struct Canconfigure1 {
     string name_variables; 
     string startbit;    
     string length;      
-    double scale;          
-    double offset;
-    bool endian;
+    string scale;          
+    string offset;
+    string endian;
 }canconfigure1[SIZE];
 
 int main()
@@ -52,38 +52,20 @@ void loadData()
         string splitdata[8];
         string split = "" + line1;
         splitString(splitdata,split);
-        cout << splitdata[0] << endl;
-        cout << splitdata[1] << endl;
-        cout << splitdata[2] << endl;
-        cout << splitdata[3] << endl;
-        cout << splitdata[4] << endl;
-        cout << splitdata[5] << endl;
-        cout << splitdata[6] << endl;
-        cout << splitdata[7] << endl;
-        
-    for (int i = 0 ; i < number_of_lines; i++)
-    {
-        /*if (!in)
-        {                                               
-            cerr << "File can't be opened! " << endl;
-            system("PAUSE");
-        }
-        */
+        cout << splitdata[0] << splitdata[1] << splitdata[2] << splitdata[3] <<
+        splitdata[4] << splitdata[5] << splitdata[6] << splitdata[7] << endl;
 
+        //Su dung for nhung khong phai cach cu nen cho mot bien dem number of lines ben ngoai con ben trong chi cho lap 1 lan, bien i cong don len
         /*
+        for (int i = 0; i < number_of_lines; i++){
         canconfigure1[i].canid = splitdata[0];
         canconfigure1[i].canlength = splitdata[1];
-        canconfigure1[i].startbit = splitdata[2]
-        canconfigure1[i].length =
-        canconfigure1[i].name_variables = 
-        canconfigure1[i].scale = 
-        canconfigure1[i].offset =  
-        canconfigure1[i].endian =  
-        */
-       
-      
-        /*
-        in >> canconfigure1[i].canid >> canconfigure1[i].canlength >> canconfigure1[i].name_variables >> canconfigure1[i].startbit >> canconfigure1[i].length  >> canconfigure1[i].endian >> canconfigure1[i].scale >>canconfigure1[i].offset;
+        canconfigure1[i].startbit = splitdata[2];
+        canconfigure1[i].length = splitdata[3];
+        canconfigure1[i].name_variables = splitdata[4];
+        canconfigure1[i].scale = splitdata[5];
+        canconfigure1[i].offset =  splitdata[6];
+        canconfigure1[i].endian =  splitdata[7];
         cout << canconfigure1[i].canid << " ";
         cout << canconfigure1[i].canlength << " ";
         cout << canconfigure1[i].name_variables<<" ";
@@ -93,10 +75,9 @@ void loadData()
         cout << canconfigure1[i].offset <<" " ;
         cout << canconfigure1[i].endian << " " << endl;
         */
-        
     }
     }
-}
+
 
 int numberoflines(){
     string line;

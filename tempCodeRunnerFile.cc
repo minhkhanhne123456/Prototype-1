@@ -1,1 +1,2 @@
-debugPrint();
+
+            if (startswith(line,"BO_")){
