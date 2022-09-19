@@ -5,10 +5,11 @@
 #include <sstream>
 #include <iterator>
 #include <cstdint>
+#include "Optimizedatawithinclass.h"
 using namespace std;
 
 static int number_of_lines;
-const int SIZE = 1000;
+
 template <size_t N>
 //Split string and add to array
 void splitString(string (&arr)[N], string str)
@@ -19,24 +20,10 @@ void splitString(string (&arr)[N], string str)
         arr[n] = *it;
 }
 
-namespace control{
-struct canconfigure1 {
-    uint32_t canid;
-    uint16_t canlength; 
-    string name_variables; 
-    uint16_t startbit;    
-    uint16_t length;      
-    double scale;          
-    double offset;
-    bool isBigendian;
-}canconfigure[SIZE];
-};
-
-
 
 int main()
     {
-     ifstream in("CAN_config1.txt");
+    ifstream in("CAN_config1.txt");
     string line1;
     
     while (getline (in, line1))

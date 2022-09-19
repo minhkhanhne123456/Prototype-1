@@ -10,43 +10,66 @@
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <CanUtils.h>
 
 static int number_of_lines;
 
-template <size_t N>
-//Split string and add to array
 
-void splitString(string (&arr)[N], string str)
-{
+using namespace std;
+
+namespace sdl {
+    template <size_t N>
+    void VehicleServiceImpl::splitString(string (&arr)[N], string str)
+    {   
     int n = 0;
     istringstream iss(str);
     for (auto it = istream_iterator<string>(iss); it != istream_iterator<string>() && n < N; ++it, ++n)
         arr[n] = *it;
-}
+    }
 
-namespace sdl {
-
-void loadData()
-{   
+    void VehicleServiceImpl::loadData(){
     ifstream in("CAN_config1.txt");
     string line1;
-    
     while (getline (in, line1))
     {
         string splitdata[8];
         string split = "" + line1;
         splitString(splitdata,split);
-        //Check split data 
-        cout << splitdata[0] << " " << splitdata[1] << " " << splitdata[2] << " " << splitdata[3] << " " <<
-        splitdata[4] << " " << splitdata[5] << " " << splitdata[6] << " " << splitdata[7] << " " << endl;
-        
-        // Create a multiple structures and assign values to struct variables, Error: Segmentation fault
-        utils::canConfigure canconfigure1[number_of_lines] = {splitdata[0],splitdata[1],splitdata[2],splitdata[3],splitdata[4],splitdata[5],splitdata[6],splitdata[7]};
-        number_of_lines++;
-        
-    }
-}
+        //Explicit type conversion
+        unsigned int canidconvert = stoi(splitdata[0]);
+        unsigned int canlengthconvert = stoi(splitdata[1]);
+        unsigned int startbitconvert = stoi(splitdata[3]);
+        unsigned int lengthconvert = stoi(splitdata[4]);
+        double scaleconvert = stod(splitdata[5]);
+        double offsetconvert = stod(splitdata[6]);
+        bool endian = false;
+        //Check the split data
+        /*cout << canidconvert << " " << canlengthconvert << " " << splitdata[2] << " " << startbitconvert << " " << lengthconvert << " " <<
+        offsetconvert << " " << splitdata[7] << endl;
+         canlengthconvert;
+        */
 
+        utils::canconfigure[number_of_lines].canId = canidconvert;
+        utils::canconfigure[number_of_lines].canLength = canlengthconvert;
+        utils::canconfigure[number_of_lines].name_variables = splitdata[2];
+        utils::canconfigure[number_of_lines].startBit = startbitconvert;
+        utils::canconfigure[number_of_lines].length = lengthconvert;
+        utils::canconfigure[number_of_lines].scale = scaleconvert;
+        utils::canconfigure[number_of_lines].offset = offsetconvert;
+        utils::canconfigure[number_of_lines].isBigendian = endian;
+
+        cout << utils::canconfigure [number_of_lines].canId << " ";
+        cout << utils::canconfigure [number_of_lines].canLength << " ";
+        cout << utils::canconfigure [number_of_lines].name_variables << " ";
+        cout << utils::canconfigure [number_of_lines].startBit << " ";
+        cout << utils::canconfigure [number_of_lines].length << " ";
+        cout << utils::canconfigure [number_of_lines].scale << " ";
+        cout << utils::canconfigure [number_of_lines].offset << " ";
+        cout << utils::canconfigure [number_of_lines].isBigendian << endl;
+        
+        number_of_lines++;
+    }
+    }
     /*
     utils::canConfigure VehicleServiceImpl::mCanConfigSpeedData = {0x610, 8, 0, 3, 1, 0, false}; // SpeedModeStatus
     utils::canConfigure VehicleServiceImpl::mCanConfigBrake = {0x610, 8, 11, 1, 1, 0, false}; // BrakeStatus

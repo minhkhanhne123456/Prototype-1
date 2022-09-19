@@ -2,6 +2,7 @@
 #include <map>
 #include "CanUtils.h"
 #include "Log.h"
+
 namespace utils {
 
 // TODO: Change to member variable when we have configure file
